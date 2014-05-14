@@ -33,7 +33,8 @@
       GhpagesPlugin.prototype.config = {
         deployRemote: 'origin',
         deployBranch: 'gh-pages',
-        environment: 'static'
+        environment: 'static',
+        ignores: []
       };
 
       GhpagesPlugin.prototype.deployToGithubPages = function(next) {
@@ -74,8 +75,8 @@
           return safefs.writeFile(pathUtil.join(outPath, '.nojekyll'), '', complete);
         });
         tasks.addTask(function(complete) {
-          docpad.log('debug', 'Ignoring ./out/posts directory...');
-          return safefs.writeFile(pathUtil.join(outPath, '.gitignore'), 'posts', complete);
+          docpad.log('debug', 'Ignoring config.ignores directory...');
+          return safefs.writeFile(pathUtil.join(outPath, '.gitignore'), config.ignores.join('\n'), complete);
         });
         tasks.addTask(function(complete) {
           docpad.log('debug', "Fetching the URL of the {config.deployRemote} remote...");
