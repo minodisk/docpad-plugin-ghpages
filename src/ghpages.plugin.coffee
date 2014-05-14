@@ -70,6 +70,11 @@ module.exports = (BasePlugin) ->
 				docpad.log 'debug', 'Disabling jekyll...'
 				safefs.writeFile(pathUtil.join(outPath, '.nojekyll'), '', complete)
 
+			# Add a .gitignore file
+			tasks.addTask (complete) ->
+				docpad.log 'debug', 'Ignoring ./out/posts directory...'
+				safefs.writeFile(pathUtil.join(outPath, '.gitignore'), 'posts', complete)
+
 			# Fetch the project's remote url so we can push to it in our new git repo
 			tasks.addTask (complete) ->
 				docpad.log 'debug', "Fetching the URL of the {config.deployRemote} remote..."
