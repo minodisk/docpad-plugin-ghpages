@@ -101,7 +101,7 @@ module.exports = (BasePlugin) ->
 				docpad.log 'debug', 'Performing push...'
 				gitCommands = [
 					['init']
-					['add', '--all', '--force']  # make sure we add absoutely everything in the out directory, even files that could be ignored by our global ignore file (like bower_components)
+					['add', '--all']
 					['commit', '-m', opts.lastCommit]
 					['push', '--quiet', '--force', opts.remoteRepoUrl, "master:#{config.deployBranch}"]
 				]
